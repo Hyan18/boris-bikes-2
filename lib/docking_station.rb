@@ -1,17 +1,18 @@
 class DockingStation
-
-  def release_bike
-    bike = Bike.new
-    return true
+  docking_station = DockingStation.new
+  
+    def release_bike
+       Bike.new
+    end
+  
+  def dock(bike)
+    @bike = bike
   end
-
-end
-
-
-class Bike
-
-  def working?
-    true
+  
+  # def bike       commented out due to attr_reader
+    # @bike
+  # end
+  
+  attr_reader :bike
+  
   end
-
-end

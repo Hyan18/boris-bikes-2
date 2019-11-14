@@ -1,6 +1,8 @@
 class Bike
-  def working?
 
+  bike = Bike.new
+  def working?
+    
   end
 
 end
