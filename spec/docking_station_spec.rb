@@ -12,7 +12,7 @@ it {is_expected.to respond_to(:release_bike)}
 it {is_expected.to respond_to(:dock).with(1).argument}
 
 # Does the docking station respond to a bike being docked
-it {is_expected.to respond_to(:bike)}
+it {is_expected.to respond_to(:bikes)}
 
 #it {expect(dock(bike)).to eq true }
 
@@ -22,13 +22,13 @@ describe '#release_bike' do
   end
 end
 
-describe "#dock" do
-  it "raises an error when the docking station is at capacity" do
-    bike = Bike.new
-    expect { subject.dock(bike) }.to raise_error(RuntimeError, "no space available")
-  end
-end
-
+describe '#dock' do
+      it 'raises an error when there are no spaces available' do
+        # bike = Bike.new
+        20.times { subject.dock Bike.new }
+        expect{ subject.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
+      end
+    end
 end
 
 describe Bike do
