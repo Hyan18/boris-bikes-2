@@ -25,7 +25,7 @@ end
 describe '#dock' do
       it 'raises an error when there are no spaces available' do
         # bike = Bike.new
-        20.times { subject.dock Bike.new }
+        DockingStation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
         expect{ subject.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
       end
     end
@@ -33,7 +33,7 @@ end
 
 describe Bike do
   # it {is_expected.to respond_to(:working?)}
-  
+
 
 
 end
