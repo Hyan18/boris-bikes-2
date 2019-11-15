@@ -22,11 +22,34 @@ describe '#release_bike' do
   end
 end
 
-describe '#dock' do
+    describe '#dock' do
       it 'raises an error when there are no spaces available' do
         # bike = Bike.new
         DockingStation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
         expect{ subject.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
       end
     end
+
+
+  describe "initialization" do
+    it "sets capacity" do
+      docking_station = DockingStation.new(10)
+      10.times{docking_station.dock Bike.new}
+      expect{ docking_station.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
+    end
+  end
+
+
+=begin
+    it "should allow you to set a @capacity" do
+        docking_station = DockingStation.new(10)
+        expect (docking_station).to eq docking_station
+    end
+
+
+    it "should allow you to set the capacity to 10" do
+        10.times {subject.dock Bike.new}
+        expect{subject(10).dock Bike.new}.to raise_error(RuntimeError, 'no space available')
+    end
+=end
 end
