@@ -1,8 +1,15 @@
 class Bike
 
-  bike = Bike.new
+  def initialize
+    @working = true
+  end
+
   def working?
-    
+    @working
+  end
+
+  def report
+    @working = false
   end
 
 end

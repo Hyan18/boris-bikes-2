@@ -20,6 +20,12 @@ describe '#release_bike' do
   it "raises an error when there are no bikes available" do
     expect { subject.release_bike }.to raise_error(RuntimeError, "no bikes available")
   end
+
+  it "does not release broken bikes" do
+    subject.dock(Bike.new)
+    puts subject.release_bike.working?
+    expect ( subject.release_bike.working? ).to be true
+  end
 end
 
     describe '#dock' do
