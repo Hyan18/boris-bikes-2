@@ -23,8 +23,7 @@ describe '#release_bike' do
 
   it "does not release broken bikes" do
     subject.dock(Bike.new)
-    puts subject.release_bike.working?
-    expect ( subject.release_bike.working? ).to be true
+    expect(subject.release_bike.working?).to eq true
   end
 end
 
