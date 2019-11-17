@@ -1,45 +1,37 @@
 require 'docking_station'
 require 'bike'
 
-
 describe DockingStation do
 
- #it "releases bike" do
-  # DockingStation.new.respond_to?(:release_bike)
- #end
-#end
+  describe '#release_bike' do
 
-it {is_expected.to respond_to(:release_bike)}
-#it { is_expected.to respond_to :working?}
-
-it {is_expected.to respond_to(:dock).with(1).argument}
-
-# Does the docking station respond to a bike being docked
-it {is_expected.to respond_to(:bikes)}
-
-#it {expect(dock(bike)).to eq true }
-
-describe '#release_bike' do
-  it "raises an error when there are no bikes available" do
-    expect { subject.release_bike }.to raise_error(RuntimeError, "no bikes available")
-  end
-
-  it "does not release broken bikes" do
-    broken_bike = Bike.new
-    broken_bike.report
-    subject.dock(broken_bike)
-    expect { subject.release_bike }.to raise_error("no working bikes available")
-  end
-
-end
-
-    describe '#dock' do
-      it 'raises an error when there are no spaces available' do
-        # bike = Bike.new
-        DockingStation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
-        expect{ subject.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
-      end
+    it "raises an error when there are no bikes available" do
+      expect { subject.release_bike }.to raise_error(RuntimeError, "no bikes available")
     end
+
+    it "does not release broken bikes" do
+      broken_bike = Bike.new
+      broken_bike.report
+      subject.dock(broken_bike)
+      expect { subject.release_bike }.to raise_error("no working bikes available")
+    end
+
+  end
+
+  describe '#dock' do
+
+    it 'raises an error when there are no spaces available' do
+      DockingStation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
+      expect{ subject.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
+    end
+
+    it "accepts broken bikes" do
+      broken_bike = Bike.new
+      broken_bike.report
+      expect { subject.dock(broken_bike) }.to_not raise_error
+    end
+
+  end
 
 
   describe "initialization" do
@@ -54,6 +46,7 @@ end
       DockingStation::DEFAULT_CAPACITY.times{docking_station.dock Bike.new}
       expect{ docking_station.dock Bike.new }.to raise_error(RuntimeError, 'no space available')
     end
+
   end
 
 end
