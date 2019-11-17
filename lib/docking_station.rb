@@ -11,6 +11,8 @@ class DockingStation
 
   def release_bike
     fail "no bikes available" if empty?
+    
+    fail "no working bikes available" if working_bikes.empty?
     @bikes.pop
   end
 
@@ -19,15 +21,18 @@ class DockingStation
     @bikes << bike
   end
 
-private
+  private
 
-def full?
-  @bikes.size >= @capacity
-end
-
-def empty?
-  @bikes.empty?
-end
-
-
+  def full?
+    @bikes.size >= @capacity
   end
+
+  def empty?
+    @bikes.empty?
+  end
+
+  def working_bikes
+    @bikes.select { |bike| bike.working? }
+  end
+
+end

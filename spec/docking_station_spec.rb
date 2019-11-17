@@ -1,4 +1,7 @@
-require './lib/docking_station'
+require 'docking_station'
+require 'bike'
+
+
 describe DockingStation do
 
  #it "releases bike" do
@@ -22,9 +25,12 @@ describe '#release_bike' do
   end
 
   it "does not release broken bikes" do
-    subject.dock(Bike.new)
-    expect(subject.release_bike.working?).to eq true
+    broken_bike = Bike.new
+    broken_bike.report
+    subject.dock(broken_bike)
+    expect { subject.release_bike }.to raise_error("no working bikes available")
   end
+
 end
 
     describe '#dock' do
